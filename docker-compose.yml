@@ -1,12 +1,16 @@
 version: '3.9'
 
 services:
-  ethereum:
-    image: ethereum/client-go:alltools-stable
+  geth:
+    build: .
     volumes:
       - ethereum_client:/root/.ethereum
+      - ethereum_network:/root/my_network/my_private_chain
+      - ./my_network:/root/my_network
     ports:
       - "30303:30303"
+    command: ["tail", "-f", "/dev/null"]
 
 volumes:
   ethereum_client:
+  ethereum_network:
